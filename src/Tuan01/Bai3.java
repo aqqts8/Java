@@ -37,16 +37,17 @@ public class Bai3 {
         JPanel pnNut = new JPanel();
         pnNut.setLayout(new FlowLayout());
 
-        JButton btnTinh = new JButton("Tính");
-        //btnTinh.setIcon(new ImageIcon("Hinh/TinhIcon.png"));
+        // Vì ở package khác nên phải dẫn vào đường dẫn trực tiếp
+        ImageIcon iconTinh = new ImageIcon(Bai3.class.getClassLoader().getResource("Hinh/TinhIcon.png"));
+        JButton btnTinh = new JButton("Tính", iconTinh);
         pnNut.add(btnTinh);
 
-        JButton btnXoa = new JButton("Xóa");
-        //btnXoa.setIcon(new ImageIcon("Hinh/XoaIcon.png"));
+        ImageIcon iconXoa = new ImageIcon(Bai3.class.getClassLoader().getResource("Hinh/XoaIcon.png"));
+        JButton btnXoa = new JButton("Xóa", iconXoa);
         pnNut.add(btnXoa);
 
-        JButton btnThoat = new JButton("Thoát");
-        //btnThoat.setIcon(new ImageIcon("../Hinh/ThoatIcon.png"));
+        ImageIcon iconThoat = new ImageIcon(Bai3.class.getClassLoader().getResource("Hinh/ThoatIcon.png"));
+        JButton btnThoat = new JButton("Thoát", iconThoat);
         pnNut.add(btnThoat);
 
         frm.add(pnTieuDe);
