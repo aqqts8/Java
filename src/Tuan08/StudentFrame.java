@@ -6,8 +6,8 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 public class StudentFrame extends JFrame {
-    // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ageTxt;
     private javax.swing.JButton deleteBtn;
     private javax.swing.JTextField emailTxt;
@@ -27,7 +27,6 @@ public class StudentFrame extends JFrame {
     private javax.swing.JButton saveBtn;
     private javax.swing.JTable studentTable;
     private static final long serialVersionUID = 1L;
-    // End of variables declaration//GEN-END:variables
     DefaultTableModel tableModel;
     List<Student> studentList;
     int currentIndex = -1;
@@ -255,11 +254,10 @@ public class StudentFrame extends JFrame {
                                         Short.MAX_VALUE))
         );
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
     private void saveBtnActionPerformed(java.awt.event.ActionEvent evt)
-    {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
+    {
         String fullname = fullnameTxt.getText();
         int age = Integer.parseInt(ageTxt.getText());
         String email = emailTxt.getText();
@@ -285,7 +283,7 @@ public class StudentFrame extends JFrame {
         resetBtnActionPerformed(null);
 
         showStudents();
-    }//GEN-LAST:event_saveBtnActionPerformed
+    }
     private void resetBtnActionPerformed(java.awt.event.ActionEvent evt)
     {
         fullnameTxt.setText("");
@@ -293,7 +291,7 @@ public class StudentFrame extends JFrame {
         emailTxt.setText("");
         phoneTxt.setText("");
         genderCb.setSelectedIndex(0);
-    }//GEN-LAST:event_resetBtnActionPerformed
+    }
     private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt)
     {
         if(currentIndex < 0) {
@@ -321,12 +319,6 @@ public class StudentFrame extends JFrame {
     }
     public static void main(String args[]) {
 
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
- /* If Nimbus (introduced in Java SE 6) is not available, stay with
-the default look and feel.
- * For details see
-http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
- */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info :
                     javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -349,7 +341,6 @@ http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
         catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(StudentFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

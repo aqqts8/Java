@@ -17,11 +17,9 @@ public class StudentModify {
 
         Connection con = null;
         try {
-            //Lay thong tin du lieu tu database
-            //B1. Ket noi toi data
+
             con = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
 
-            //B2. Thuc hien lay du lieu
             String sql = "select * from students";
 
             if(s != null && !s.isEmpty()) {
@@ -31,7 +29,6 @@ public class StudentModify {
 
             ResultSet resultSet = statement.executeQuery();
 
-            //Fetch data
             while(resultSet.next()) {
                 Student std = new Student(
                         resultSet.getInt("id"),
@@ -43,14 +40,14 @@ public class StudentModify {
                 dataList.add(std);
             }
         } catch (SQLException ex) {
-            System.out.println("Lỗi");
+            System.out.println("Lỗi"+ ex.getMessage());
         } finally {
             //B3. Dong ket noi toi database
             if(con != null) {
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    System.out.println("Lỗi");
+                    System.out.println("Lỗi"+ ex.getMessage());
                 }
             }
         }
@@ -60,11 +57,7 @@ public class StudentModify {
     public static void update(Student std) {
         Connection con = null;
         try {
-            //Lay thong tin du lieu tu database
-            //B1. Ket noi toi data
             con = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
-
-            //B2. Thuc hien lay du lieu
             String sql = "update students set fullname = ?, email = ?,gender = ?, age = ?, phone = ? where id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
 
@@ -77,14 +70,14 @@ public class StudentModify {
 
             statement.execute();
         } catch (SQLException ex) {
-            System.out.println("Lỗi");
+            System.out.println("Lỗi "+ ex.getMessage());
         } finally {
             //B3. Dong ket noi toi database
             if(con != null) {
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    System.out.println("Lỗi");
+                    System.out.println("Lỗi "+ ex.getMessage());
                 }
             }
         }
@@ -93,11 +86,9 @@ public class StudentModify {
     public static void delete(int id) {
         Connection con = null;
         try {
-            //Lay thong tin du lieu tu database
-            //B1. Ket noi toi data
+
             con = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
 
-            //B2. Thuc hien lay du lieu
             String sql = "delete from students where id = ?";
             PreparedStatement statement = con.prepareStatement(sql);
 
@@ -105,14 +96,13 @@ public class StudentModify {
 
             statement.execute();
         } catch (SQLException ex) {
-            System.out.println("Lỗi");
+            System.out.println("Lỗi "+ ex.getMessage());
         } finally {
-            //B3. Dong ket noi toi database
             if(con != null) {
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    System.out.println("Lỗi");
+                    System.out.println("Lỗi "+ ex.getMessage());
                 }
             }
         }
@@ -120,11 +110,8 @@ public class StudentModify {
     public static void insert(Student std) {
         Connection con = null;
         try {
-            //Lay thong tin du lieu tu database
-            //B1. Ket noi toi data
             con = DriverManager.getConnection(HOST, USERNAME, PASSWORD);
 
-            //B2. Thuc hien lay du lieu
             String sql = "insert into students (fullname, email, gender, age, phone) values (?, ?, ?, ?, ?)";
             PreparedStatement statement = con.prepareStatement(sql);
 
@@ -136,14 +123,13 @@ public class StudentModify {
 
             statement.execute();
         } catch (SQLException ex) {
-            System.out.println("lỗi");
+            System.out.println("lỗi "+ ex.getMessage());
         } finally {
-            //B3. Dong ket noi toi database
             if(con != null) {
                 try {
                     con.close();
                 } catch (SQLException ex) {
-                    System.out.println("Lỗi");
+                    System.out.println("Lỗi "+ ex.getMessage());
                 }
             }
         }

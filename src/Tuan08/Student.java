@@ -2,7 +2,7 @@ package Tuan08;
 
 public class Student {
     int id;
-    String fullname, gender, email, phone;
+    String fullname, gender, email,phone ;
     int age;
     public Student(int id, String fullname, String gender, String email, String
             phone, int age) {
