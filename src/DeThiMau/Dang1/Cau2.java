@@ -83,6 +83,58 @@ public class Cau2 extends JFrame {
         JButton btnLamMoi = new JButton("Lam Moi");
         JButton btnDong = new JButton("Dong");
 
+        // Viểt code Java cho nút tính tiền: (3 điể m)
+        // Nếu giờ kết thúc > giờ bắt đầu thì tính và xuất kết quả tiền thanh toán. Trong đó:
+        // Tiền thanh toán = (giờ kết thúc – giờ bắt đầủ) * đơn giá. Đơn giá được tính theo qui cách sau:
+        // Trước 10 giờ và từ sau 23 giờ là giờ nghĩ
+        // Từ 10 giờ đến trước 17 giờ thì đơn giá cho 1 giờ là 20000 đồng
+        // Từ 17 giờ đến 23 giờ thì đơn giá cho 1 giờ là 45000 đồng
+        // Ngược lại thì thông báo “Giờ kết thúc phải > giờ bắt đầu”.
+
+        btnThanhToan.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double batDau = Double.parseDouble(txtGioBatDau.getText());
+                double ketThuc = Double.parseDouble(txtGioKetThuc.getText());
+
+                if (ketThuc > batDau) {
+                    double tong = ketThuc - batDau;
+                    double tienThanhToan = 0;
+                    for (double i = batDau; i < ketThuc; i++) {
+                        if (i < 10 || i >= 23) {
+                            tienThanhToan += 0;
+                        } else if (i >= 10 && i < 17) {
+                            tienThanhToan += 20000;
+                        } else if (i >= 17 && i < 23) {
+                            tienThanhToan += 45000;
+                        }
+                    }
+                    txtTienThanhToan.setText(String.valueOf(tienThanhToan));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Giờ kết thúc phải > giờ bắt đầủ");
+                }
+            }
+        });
+
+        //Viết code Java cho nút Làm Mới là xoá dữ liệủ trổng các ô JTextField và đưa con trỏ vào ô Giờ bắt đầu. (1 điểm)
+
+        btnLamMoi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                txtGioBatDau.setText(null);
+                txtGioKetThuc.setText(null);
+                txtTienThanhToan.setText(null);
+                txtGioBatDau.requestFocus();
+            }
+        });
+
+        btnDong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
         pnCenterRight.add(btnThanhToan, gbc1);
         pnCenterRight.add(btnLamMoi, gbc1);
         pnCenterRight.add(btnDong, gbc1);
