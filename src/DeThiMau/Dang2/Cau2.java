@@ -77,7 +77,9 @@ public class Cau2 extends JFrame {
         btnExit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int result = JOptionPane.showConfirmDialog(null, "Ban co muon thoat khong", "Xac nhan thoat" , JOptionPane.YES_NO_OPTION);
+                Object[] options = {"Dong y", "Khong dong y"};
+                int result = JOptionPane.showOptionDialog(null, "Ban co muon thoat khong", "Xac nhan thoat" , JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
                 if (result == JOptionPane.YES_OPTION) {
                     System.exit(0);
