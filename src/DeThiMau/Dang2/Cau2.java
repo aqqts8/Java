@@ -236,7 +236,7 @@ public class Cau2 extends JFrame {
     }
 
     public  class BookManager {
-        private static final String URL = "jdbc:mysql://localhost/test_filter";
+        private static final String URL = "jdbc:mysql://localhost/db_libary";
         private static final String USER = "root";
         private static final String PASS = "";
         public BookManager() throws ClassNotFoundException {
