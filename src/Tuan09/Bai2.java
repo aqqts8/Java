@@ -5,6 +5,10 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Bai2 extends JFrame {
     public Bai2() {
@@ -65,11 +69,62 @@ public class Bai2 extends JFrame {
         JButton btnSave = new JButton("Save");
         JButton btnExit = new JButton("Exit");
 
+        btnSave.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent e) {
+               try {
+                   BookDAO bookDAO = new BookDAO();
+                   int bookId = Integer.parseInt(cbId.getSelectedItem().toString());
+                   String title = txtTitle.getText();
+                   int price = Integer.parseInt(txtPrice.getText());
+                   bookDAO.updateBook(bookId, title, price);
+                   txtKetqua.setText("Sách đã được sửa thành công");
+               } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
+                   ex.printStackTrace();
+                   txtKetqua.setText("Lỗi khi sửa sách: " + ex.getMessage());
+               }
+           }
+        });
+
         pnBottom.add(txtKetqua);
         pnBottom.add(btnSave);
         pnBottom.add(btnExit);
         pnMain.add(pnBottom, BorderLayout.SOUTH);
 
+        try {
+            BookDAO bookDAO = new BookDAO();
+            List<Books> allBooks = bookDAO.layTatCaSach();
+            for (Books book : allBooks) {
+                cbId.addItem(Integer.toString(book.getId()));
+            }
+            if (!allBooks.isEmpty()) {
+                Books firstBook = allBooks.get(0);
+                txtTitle.setText(String.valueOf(firstBook.getTitle()));
+                txtPrice.setText(String.valueOf(firstBook.getPrice()));
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            txtKetqua.setText("Lỗi khi lấy ID: " + e.getMessage());
+        }
+
+        cbId.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    BookDAO bookDAO = new BookDAO();
+                    int bookId = Integer.parseInt(cbId.getSelectedItem().toString());
+                    Books book = bookDAO.getBookById(bookId);
+                    if (book != null) {
+                        txtTitle.setText(String.valueOf(book.getTitle()));
+                        txtPrice.setText(String.valueOf(book.getPrice()));
+                    } else {
+                        lblTitle.setText("Title: N/A");
+                        lblPrice.setText("Price: N/A");
+                    }
+                } catch (SQLException | ClassNotFoundException | NumberFormatException ex) {
+                    ex.printStackTrace();
+                    txtKetqua.setText("Lỗi khi lấy thông tin sách: " + ex.getMessage());
+                }
+            }
+        });
 
         frame.setVisible(true);
     }

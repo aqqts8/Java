@@ -48,6 +48,18 @@ public class BookDAO {
         return newBookId;
     }
 
+    public void updateBook(int bookId, String title, int price) throws SQLException, ClassNotFoundException {
+        try (Connection connection = KetNoiCSDL.getConnection()) {
+            String query = "UPDATE books SET Title = ?, Price = ? WHERE Id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, title);
+                statement.setInt(2, price);
+                statement.setInt(3, bookId);
+                statement.executeUpdate();
+            }
+        }
+    }
+
     public void deleteBook(int bookId) throws SQLException, ClassNotFoundException {
         try (Connection connection = KetNoiCSDL.getConnection()) {
             String query = "DELETE FROM books WHERE Id = ?";
@@ -56,6 +68,27 @@ public class BookDAO {
                 statement.executeUpdate();
             }
         }
+    }
+
+    public Books getBookById(int bookId) throws SQLException, ClassNotFoundException {
+        Books book = null;
+
+        try (Connection connection = KetNoiCSDL.getConnection()) {
+            String query = "SELECT * FROM books WHERE Id = ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setInt(1, bookId);
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        int id = resultSet.getInt("Id");
+                        String title = resultSet.getString("Title");
+                        int price = resultSet.getInt("Price");
+                        book = new Books(id, title, price);
+                    }
+                }
+            }
+        }
+
+        return book;
     }
 
     public List<Books> searchBooks(String keyword) throws SQLException, ClassNotFoundException {
